@@ -1,0 +1,6 @@
+
+run docker commands without sudo or root
+
+$>docker info
+Usermod –aG docker <user>
+

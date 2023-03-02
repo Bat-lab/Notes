@@ -1,0 +1,65 @@
+Ansible:-
+Ansible is a configuration management, deployment and orchestration(control) tool, it aims to provide large productivity gains to wide variety of automation chalanges. which works on push notification.
+
+it mitigates of manual tasks and execution time while chances of errors are very less.
+
+uses yaml language which is easy to understand, write and execute.
+
+
+three types of ways to execute ansible
+
+1)ad-hoc
+2)modules
+3)playbook
+
+1)ad-hoc
+ad-hoc commands are basic linux commands which can be run individually to perform quick function, there is no idempotency.
+
+these are for one time usage so are not used for configuration management and deployment
+
+2)modules:-
+it checks either command is affecting already exist object or not, it has idempotency.
+-m flag define this is module
+
+3)playbook:-
+One or more modules combined makes it playbook in ansible. Yaml format is used to write playbook.
+
+it consist of var, task, handlers, files, templetes and roles.
+
+
+it is divided into many sections
+
+Target section:-
+defines the host against which playbooks task has to be executed.
+
+variable section:-
+defines variables.
+
+task section:-
+list of all modules that we need to run in an order.
+
+
+Handlers:-
+
+Handlers are just like regular tasks in ansible that only run when notified. Handlers are a very useful as well as important concept in Ansible.
+
+handlers are like task but run when called by another task.
+
+Notify directive:- just notify (its your turn go get em)
+Handler directive:- groups tasks under it self.
+
+if we change in ssh config then sshd needs a restart which we cant do untill all done after which we can send a signal to a task that will restart the sshd service.
+
+
+Dry run:-
+check whether playbook is formatted correctly
+
+ansible-playbook handlers.yml --check
+
+
+Loops:=-
+
+to repeat a task multiple times.
+
+
+

@@ -1,0 +1,51 @@
+Good knowledge of Linux operating systems like RedHat Linux, centos, Ubuntu,
+Installation, configuration, troubleshooting and administration of Linux OS,
+Good Knowledge of Symlink and Hardlink,
+Linux Process Management,
+Disk Management, LVM (Logical Volume, Volume Group), File Systems,
+Managing of partitions and FS using Logical Volume Manager FDISK
+Good knowledge of storage migration,
+File system operations. (Create, mount, unmount and remove),
+Linux File System Troubleshooting,
+Kernel Compilation as per client’s requirement,
+Basic Shell Scripting,
+User Administration (Creation, Modification, Deletion, Managing permissions),
+Good Understanding of compression and archive (tar, zip, gz,),
+Good Knowledge of Permissions (chmod) and Special permissions (STICKYBIT.SUID.SGID)and ACL,
+Basic Networking in Linux,
+Use and configuration of FTP, TELNET, SCP, RSYNC to transfer files,
+Good Knowledge of RPM (RedHat Package Manager) and Yum,
+Good Knowledge of Firewall,
+Configure DNS Server, Deep Knowledge and Troubleshooting Issues.
+
+Configure Web Server with Multiple Domains and Troubleshooting Issues, Name Base &Ip Base, User Authentication,
+Configure SAMBA Server,
+70% of hardware knowledge and 60% of networking knowledge
+
+
+
+
+KNOWLEDGE OF DEVEOPS TOOLS
+
+    Good knowledge of Docker
+   Docker volume creation & management
+   Deployment of application in container
+   Docker networking & troubleshooting
+   Container creation using dockerfile and docker compose
+
+
+	Good knowledge of GIT
+    GIT repository management
+      GIT user creation and management
+             Branch creation and management
+    Knowledge of GIT stashing, reset and revert
+
+
+	Good knowledge of kubernetes
+    knowledge of object and pod creation & management
+    knowledge of ks8 networking
+    knowledge of replication and scaling in ks8
+    Deployment & Rollback in ks8
+    ks8 volume management and persistent volume claim
+$ rsync -av -e 'ssh -p 2200' /src/ user@remote:/path/to/dst
+

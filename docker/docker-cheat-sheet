@@ -1,0 +1,104 @@
+Docker Cheat Sheet
+
+TLDR; [cont]=Container name [img]=image name
+
+Image Related:-
+docker build [Dckerfile path]
+
+docker build -t [name-of-image] [dockerfile path]-----------build an image from dockerfile with a tag
+
+docker pull [img]
+docker push [img]
+
+docker commit [container] [new-image-name]------------------build a new image from container
+
+docker rmi [img]
+docker save [img] > [tar-file]------------------------------saves an image to tar
+
+docker load -i [tar-file]--------------------------------------load image from tar
+
+
+Container:-
+
+Run a [container]:-
+
+docker create [img]------------------------------create a container without starting it
+
+docker run -it -rm [img]-------------------------create and run a command in container delete it after executing command
+
+docker run -td [img]----------------------------Start a container in background
+
+docker run -it [img] /bin/bash-----------------------Start an interactive container and run a command
+
+docker run -p [host:container] -d image----------Export port from a container
+
+docker run --name [cont] [img]------------------------Start a named container
+
+
+SPRUDS on [container]:-
+
+docker start/stop/restart [cont]--------------------------------------------start stop Restart a container
+
+docker pause/unpause [cont]---------------------------------pause/unpause procecces in running container
+
+docker rename [cont] [new-cont]------------rename container
+
+docker rm [cont]--------------------------------delete a container if it isnt running
+
+docker update [cont]------------------------------update config of container
+
+docker kill [cont]-------------------------------kill running container
+
+
+Trouble shhoting [container]:-
+
+docker attach [cont]------------------attach to running container
+
+docker exec -it [cont] /bin/bash------------------go in container with /bin/bash
+
+docker run -d \ label=traefik.backend=jenkins jenkins-----------------------------------------Add metadata to container
+
+Information and logs:-
+
+docker ps-----------------------------------list running container
+
+docker ps -a-----------------------------------shows all (running and stopped) container
+
+docker logs [cont]-----------------------------list logs of a running container
+
+docker port [cont]-------------------------------show port mapping of container
+
+docker events [cont]---------------------------list real time events of container
+
+docker top [cont]----------------------------------show running procecces of container
+
+show stats [cont]-----------------------------show resource consumption of container
+
+docker images ls-------------------------show all images (locally)
+
+
+Network:-
+
+docker network ls------------------------------------------list networks
+
+docker network rm [net]-------------------------------remove network
+
+docker network inspect [net]----------------------------info of a network
+
+docker network connect [net] [cont]-----------------connect a container to network
+
+docker network disconnect [net] [cont]-----------------disconnect a container to network
+
+
+Volumes:-
+
+docker volume ls--------------------------------------------list volumes
+
+docker volume prune------------------------------------------prune volumes
+
+docker system prune --volumes--------------------------------prune everything with volumes
+
+sudo ls -l /var/lib/docker/volumes/vol-name/_data------------volume location on disk
+
+
+

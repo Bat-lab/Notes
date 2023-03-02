@@ -1,0 +1,5 @@
+after installation if it repeats asking root passwd while my_secure_installation
+sudo mysql
+then set root passwd
+
+do my_secure_installation again

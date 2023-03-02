@@ -1,0 +1,19 @@
+git config --global user.name "Bat-lab"
+git config --global user.email batmail555@protonmail.com
+
+  135  mkdir new
+  134  cd new/
+  135  touch this.txt
+  136  git init
+  137  git status
+  138  git add.
+  139  git add .
+  140  git commit -m "first commit"
+  141  git remote add origin https://github.com/Bat-lab/projects-notes.git
+  142  git push -u origin master
+  143  ip r
+  144  systemctl status sshd
+  145  sudo apt install openssh-server
+  146  cat this.txt
+  147  git push -u origin master
+

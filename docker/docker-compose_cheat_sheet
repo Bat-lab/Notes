@@ -1,0 +1,59 @@
+Docker-Cpmose:-
+
+docker-compose up -d--------------------------runs docker compose in detached mode from yaml
+
+docker-compose down---------------------------brings down container of yml file
+
+docker-compose up -d --build------------------build the images before starting the services
+
+docker-compose images-------------------------list all the images that docker-compose built(in yaml dir)
+
+
+docker-compose ps-----------------------------list all the running containers that docker-compose built
+
+docker-compose restart------------------------restart service without changing attributes
+
+
+docker-compose.yml ex:-
+
+version: '3'
+services:
+ web:                          -----------------------------service name (ie nginx image )
+   build:                       -----------------------------if you have docker file too
+    context: .
+    dockerfile: Dockerfile
+   container_name: <cont-name>
+   restart: always
+   privileged: true
+   ports:
+    - 'host:container'
+   volumes:
+    - 'host:container'
+
+
+
+
+Dockerfile ex:-
+
+FROM centos:7.9.2009
+RUN yum update -y
+COPY java.sh<current dir> /etc/profile.d/<container dir>
+RUN mkdir /opt/and/
+ADD android-studio-2021.1.1.22-linux.tar<current dir> /opt/and/<container dir>
+ENTRYPOINT /usr/sbin/init
+
+
+
+ex:-
+version: '3'
+services:
+  web1:
+   image: php:7.2-apache
+   container_name: papache
+   restart: always
+   ports:
+    - '8111:80'
+
+
+
+

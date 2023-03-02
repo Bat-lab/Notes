@@ -1,0 +1,31 @@
+kubectl get pods
+kubectl get services
+
+Create deployment
+kubectl apply -f <file-name>
+
+delete deployment
+kubectl delete -f <file-name>
+
+create svc:-
+kubectl create svc nodeport nginx --tcp=80:80
+
+
+minikube start
+minikube start --force
+kubectl get nodes
+kubectl create deployment (deployment-name) --image=(image-name)
+kubectl get pods
+kubectl get services -----------------shows pod ip
+kubectl get replicaset ---------------no. of replicas desired and current
+kubectl get deployment ---------------up to date replicaset
+kubectl delete deployment (deployment-name)
+
+_______
+Loggs
+-------
+volumes:-
+kubectl describe pvc --namespace <namespace>
+
+pods:-
+kubectl describe pod <podname> --namespace <namespace>

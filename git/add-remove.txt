@@ -1,0 +1,10 @@
+set:-
+
+git config --global user.name "Bat-lab"
+git config --global user.email batmail555@protonmail.com
+
+unset:-
+
+git config --global --unset user.name
+git config --global --unset user.email
+git config --global --unset credential.helper

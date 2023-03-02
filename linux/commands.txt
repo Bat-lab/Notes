@@ -1,0 +1,16 @@
+ 
+find / -size 50k
+
+find / -type f -atime 60
+
+
+
+setfacl -R -m "u:apmosys:rw" /opt/rearbkp.yaml --------------- apmosys will have rw on /opt/rearbkp.yaml -R recursive if directory
+
+getfacl /opt/rearbkp.yaml --------------- to check all set facl
+
+setfacl -b /opt/rearbkp.yaml -------------- to remove all facl
+
+setfacl -R -x "u:apmosys" rearbkp.yaml ------------- -x to remove one user only
+
+

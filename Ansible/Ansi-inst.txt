@@ -1,0 +1,36 @@
+
+COMMON STEP FOR SERVER AND NODES
+
+useradd -m ansible
+passwd ansible
+
+vim /etc/sudoers
+
+ansible ALL=(ALL:ALL) NOPASSWD: ALL
+
+-------------------------------------------------------
+
+SERVERV SIDE CONFIGURATION
+
+pacman -S ansible
+
+ansible --version
+
+su - ansible
+
+vi /etc/ansible/hosts
+[demo]
+192.168.12.56
+192.168.12.77
+
+ssh-keygen
+enter all the way through
+
+ssh-copy-id ansible@192.168.12.56
+ssh-copy-id ansible@192.168.12.77
+
+ansible all --list-hosts
+
+ansible demo[0] --list-hosts
+
+

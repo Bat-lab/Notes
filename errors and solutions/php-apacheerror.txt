@@ -1,0 +1,20 @@
+ 
+disableble/enable php
+
+sudo a2dismod php8.1
+sudo a2enmod php8.1
+
+
+check packages
+dpkg -l | grep -i php
+
+
+Errorr and solution
+Apache not starting
+apache2.service: Control process exited, code=exited, status=139/n/a
+
+check php packages
+if multiple installed
+select appropriate to your project and disable all others
+cmd:- dpkg -l | grep -i php
+cmd:- sudo a2dismod php8.1

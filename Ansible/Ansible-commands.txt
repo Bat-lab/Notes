@@ -1,0 +1,35 @@
+
+
+Ad-hoc method to execute commands:-
+no idiompotency=it will execute commands regardless
+ad-hoc method is used to run individual commands, for complicated setup yaml is used.
+
+ex:-
+ansible demo[0] -a "touch file1"
+ansible demo[0] -a "sudo yum update -y"
+ansible demo[0] -ba "yum update -y"--------------------------(-b flag is to become root so that we can run commands without sudo)
+
+
+Module:-
+-m flag define this is module, it checks either command is affecting already exist object or not.
+ex:-
+ansible demo[1] -b -m yum -a "pkg=tree" ----------------------------will install tree
+ansible demo[1] -b -m yum -a "pkg=tree state=absent" ---------------will remove tree
+ansible demo[1] -b -m yum -a "pkg=tree state=present" --------------will install tree
+ansible demo -b -m copy -a "src=f1 dest=/tmp" ---------------------copy from base to nodes
+ansible demo[1] -b -m user -a "name=fuckyou"--------------------------creates user
+ansible demo[1] -b -m service -a "name=httpd state=started"---------start httpd service
+
+Playbook:-
+ansible-playbook basic-pkg-install.yaml --------------------------if node connected with passwrd less ssh
+ansible-playbook -u ansible --ask-pass basic-pkg-install.yaml-----if not connected with passwrd less ssh(more in ansible-playbooks-ex.txt)
+
+Usefull commands:-
+
+ansible 192.168.3.84 -m ping -u ansible --ask-pass--------------------------check connectivity or ping via ansible
+
+
+
+
+
+

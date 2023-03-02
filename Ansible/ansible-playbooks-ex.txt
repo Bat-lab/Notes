@@ -1,0 +1,81 @@
+[ansible@apmosyslt0152 ~]$ cat nginx.yaml
+---
+
+- hosts: apache
+  gather_facts: true
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+
+   # - name: update repo
+   #   tags: patch
+   #   shell: "yum update -y"
+   #   register: patchresult
+   # - name: install
+   #   package:
+   #     name: epel-release
+   #     state: present
+    - name: install
+      package:
+        name: nginx
+        state: present
+
+    - name: Make sure a service unit is running
+      service:
+        state: started
+        name: nginx
+
+    - name: Enable service httpd and ensure it is not masked
+      service:
+        name: nginx
+        enabled: yes
+        masked: no
+
+
+ RUN:   $ ansible-playbook nginx.yaml
+
+
+---
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+        - name: Install HTTPD on centos 7
+          action: yum name=httpd state-installed
+
+
+--- #variable example
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  vars:
+        pkgname: httpd
+  tasks:
+        - name: Install HTTPD on centos 7
+        action: yum name='{{pkgname}}' state-installed
+
+
+--- #handlers example
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+        - name: Install HTTPD on centos 7
+          action: yum name=httpd state-installed
+          notify: restart httpd
+  handlers:
+        - name: restart httpd
+          action: service name=httpd state=restarted
+
+
+
+
+if host is not connected with password less ssh
+1:- make sure sshd is running on node
+2:- do ssh for one time or save key
+3:- install sshpass in server to --ask-pass
+RUN: $ansible-playbook -u ansible --ask-pass download.yaml

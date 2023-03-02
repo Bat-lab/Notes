@@ -1,0 +1,178 @@
+Step 0.5:-
+# systemctl stop firewalld
+# systemctl disable firewalld
+
+vi /etc/sysconfig/selinux
+Current mode:                   disabled
+restart
+sestatus
+
+
+STEP 1 (Basic package install)
+
+#  yum install gcc make vim rsync zip unzip bzip2 telnet lsof elinks wget net-tools ca-certificates tmux yum-utils net-snmp-utils epel-release perl-version perl-Sys-Syslog cpan kernel kernel-source kernel-devel
+
+
+STEP 2 (EXTRA REPO add)
+
+
+#  yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+#   yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+
+#    yum-config-manager --enable remi-php74
+
+
+STEP 3 ( Install apache+php+phpmyadmin package)
+
+yum install httpd
+
+yum install php-common
+
+
+yum install php php-mcrypt php-cli  php-curl php-zip php-fileinfo php-mysql php-pdo php-gd php-mbstring php-imap php-ldap php-domxml php-xmlrpc php-pecl-apcu php-opcache php-pear-CAS php-mbstring php-imap php-gd php-pdo  php-apcu php-xmlrpc  php-zend-abi
+
+
+yum --enablerepo=remi,remi-test  install phpMyAdmin
+
+
+vim /etc/httpd/conf.d/phpMyAdmin.conf
+
+
+
+
+Alias /phpMyAdmin /usr/share/phpMyAdmin
+Alias /phpmyadmin /usr/share/phpMyAdmin
+
+<Directory /usr/share/phpMyAdmin/>
+   AddDefaultCharset UTF-8
+
+#   Require local      --------------changes
+Require all granted    --------------- changes
+</Directory>
+
+<Directory /usr/share/phpMyAdmin/setup/>
+   Require all granted    -----------------changes
+</Directory>
+
+# These directories do not require access over HTTP - taken from the original
+# phpMyAdmin upstream tarball
+#
+<Directory /usr/share/phpMyAdmin/libraries/>
+    Require all denied
+</Directory>
+
+<Directory /usr/share/phpMyAdmin/templates/>
+    Require all denied
+</Directory>
+
+<Directory /usr/share/phpMyAdmin/setup/lib/>
+    Require all denied
+</Directory>
+
+<Directory /usr/share/phpMyAdmin/setup/frames/>
+    Require all denied
+</Directory>
+
+
+
+systemctl restart httpd
+systemctl enable httpd
+
+
+
+STEP 4 (Install mysql & configuration)
+
+rpm -ivh https://repo.mysql.com/mysql80-community-release-el7-1.noarch.rpm
+
+rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+
+yum -y install mysql-community-server  --disablerepo=mysql80-community --enablerepo=mysql57-community
+
+
+/etc/yum.repos.d/mysql-community.repo------------------disable 8.0 and rnable 5.7
+
+systemctl start mysqld
+systemctl enable mysqld
+
+
+$  vim /etc/my.cnf
+        character_set_server=utf8
+        max_allowed_packet   = 512M
+        query_cache_size     = 256M
+        innodb_log_file_size = 1024M
+
+        $   cd /var/lib/mysql
+
+        $   rm -rf ib_logfile1 ib_logfile0
+
+
+        $  systemctl restart mysqld
+
+
+        cat /var/log/mysqld.log | grep -i 'temporary password'
+
+        mysql_secure_installation
+
+        mysql -u root -p
+        uninstall plugin validate_password;
+
+
+STEP 5  (OTRS 6.0.17 Install and configure)
+
+   NEW download link : https://wurmberg.otrs.com/external/download-center
+
+        wget https://ftp.otrs.org/pub/otrs/otrs-6.0.17.tar.bz2
+
+        tar -jxvf otrs-6.0.17.tar.bz2
+
+        mv otrs-6.0.17 otrs
+
+        cd /opt/otrs/bin/
+
+
+        ./otrs.CheckModules.pl
+
+        yum install cpan perl-version perl-Sys-Syslog
+
+        yum install perl"(Apache::DBI)" perl"(Archive::Tar)" perl"(Archive::Zip)" perl"(Crypt::Eksblowfish::Bcrypt)" perl"(Crypt::SSLeay)" perl"(Date::Format)" perl"(DateTime)" perl"(DBI)" perl"(DBD::mysql)" perl"(DBD::ODBC)" perl"(DBD::Oracle)" perl"(DBD::Pg)" perl"(Mail::IMAPClient)" perl"(Encode::HanExtra)" perl"(IO::Socket::SSL)" perl"(JSON::XS)" perl"(LWP::UserAgent)" perl"(IO::Socket::SSL)" perl"(Authen::SASL)" perl"(Authen::NTLM)" perl"(ModPerl::Util)" perl"(Net::DNS)" perl"(Net::LDAP)" perl"(Template)" perl"(Template::Stash::XS)" perl"(Text::CSV_XS)" perl"(XML::LibXML)" perl"(XML::LibXSLT)" perl"(XML::Parser)" perl"(YAML::XS)"
+
+        ./otrs.CheckModules.pl
+
+        install remaning via cpan
+
+        cpan
+        install IO::Socket::SSL
+
+
+        useradd -d /opt/otrs -c 'OTRS user' otrs
+        usermod -G apache otrs
+        cp /opt/otrs/Kernel/Config.pm.dist /opt/otrs/Kernel/Config.pm
+        perl -cw /opt/otrs/bin/cgi-bin/index.pl
+
+        cp /opt/otrs/scripts/apache2-httpd.include.conf /etc/httpd/conf.d/otrs.conf
+
+        /opt/otrs/bin/otrs.SetPermissions.pl --web-group=apache --otrs-user=otrs
+
+        systemctl restart httpd
+        systemctl enable httpd
+
+
+        Create DB and user
+        mysql -u root -p
+
+        CREATE DATABASE otrs;
+
+        GRANT ALL PRIVILEGES ON otrs.* TO 'otrs'@'localhost' IDENTIFIED BY 'password';
+
+        FLUSH PRIVILEGES;
+        \q
+
+
+        OR with fronend
+
+        http://your_ip/phpmyadmin
+
+
+
+        http://172.16.0.107/otrs/installer.pl

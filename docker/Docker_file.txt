@@ -1,0 +1,18 @@
+FROM alpinelinux/ansible
+RUN apk update; apk add openssh-server openjdk11
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+RUN ssh-keygen -A
+#ARG ROOT_PASS="Test@123"
+ENV ROOT_PASS="Test@123"
+ADD root.sh /root.sh
+RUN chmod 777 /root.sh
+RUN echo -e "$ROOT_PASS\n$ROOT_PASS" | passwd root
+EXPOSE 22
+#ENTRYPOINT ["/usr/sbin/sshd", "-D"]
+ENTRYPOINT ["/root.sh"]
+
+
+
+docker build -t bathub/ssh-ansible:2.0 .
+
+docker push bathub/ssh-ansible:2.0

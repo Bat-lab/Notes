@@ -1,0 +1,293 @@
+LINUX ONE LINER ANSWER*****
+
+
+1. Difference between soft link and hard link?
+Ans. Symlink:
+ 	      can cross partition
+	      inode change
+              parent file deleted child become orphan
+
+    Hardlink: If parent gets deleted no impact on child
+              type of backup, can't create on dir.
+	      same inode
+symlink : ln -s /boot/filename /anotherfilename
+hard link : ln /filename /otherfilename
+
+
+2. How to check updated kernel version?
+Ans. uname -r
+
+3. How to check or see  process?
+Ans. ps -ef
+
+4. in boot process which file loads 1st?
+Ans. BIOS loads first
+
+5. how to create local repository
+Ans. git init 
+
+6. How you will provide the ssh rights to particular user
+Ans. sudo vi /etc/ssh/sshd_config
+     1.AllowUsers sk (:wq) 2.AllowGroups root 3.sudo systemctl restart sshd
+
+7.How to take backup through rsync and use of flags used in it.
+Ans. rsync -rv filename path 
+     rsync -avzh source destination(usename@IP:/path)
+     a=archive h=human readable  z=compress b=backup
+
+8.Which is secure back-up tool ( ie. rsync or scp )
+Ans. scp bcoz scp uses ssh and rsync is similar to plain HTTP.
+
+9.How to give Sudo permission.
+Ans. visudo <user> ALL=(ALL) ALL (require password) <user> ALL=(ALL) NOPASSWD: ALL (no password require)
+
+10. How old Linux is.
+Ans. 1991
+
+11.What is crontab and how to schedule cron job.
+Ans. Cron is nothing but a schedular. used for automation.
+     crontab -e 
+     * * * * * <jobs>  (minute,hours,date or day of month,month ,day of week)
+
+12.What is Samba Server & in what way it is more benificial?
+Ans. Samba is open source file sharing system over a network.
+     Samba enables Linux/Unix machines to communicate with Windows machines in a network.
+
+13.What are the benifits of using Cron Scheduler
+Ans. If you want to execute some task on perticular time so we can schedule a job with the help of crontab
+     and that task will be performed at the perticular time.
+     as we can forget repetitive but important task so we do.
+
+14.What is Cron scheduling
+Ans. cron is schedular, task schedular, just like alarm, used for automation.
+
+15.What is Kernel Limit & Tunning
+Ans.
+
+16.is there loss of data when you extend LVM partition
+Ans. NO
+
+17.Why Kernel Panic appears 
+Ans. e2fsk not completed, wrong entry in fstab
+
+18.How can we check the newly added HDD?
+Ans. ls /dev/sd* OR df-h OR lsblk
+
+
+
+
+
+
+
+
+
+
+19.How can we add multiple user at a time?
+Ans. 
+
+
+
+
+
+
+
+
+
+
+
+20.can we check process id with the help of Top commad?
+Ans. yes but only running processes.
+
+21.How can we check process status?
+Ans. ps -aux
+
+22.How to kill permanently a process
+Ans. kill -9 <pid> sigterm
+     kill <pid> sigkill
+     pkill <process name>
+
+23.how to get backup of specific files in a directory from one m/c to other.
+Ans. There are several methods one of its is 
+     we can tar all files which we want and rsync or scp to other m/c.
+
+24.What is read write execute ?
+Ans. its permissions.
+
+25.Which monitoring tool and centos version  you used in your organization ? 
+Ans. Zabbix, Graffana. CentOs 7
+
+26.Difference between FTP & SFTP ? 
+Ans. FTP= file transfer protocol used to transfer files between a client and server on a computer network
+     SFTP= secure file transfer protocol. SFTP requires authentication by the server.
+     The main difference between FTP and SFTP is the “S.” SFTP is an encrypted or secure file transfer protocol.
+     With FTP, when you send and receive files, they are not encrypted.
+     You may be using a secure connection, but the transmission and files themselves are not encrypted.
+
+27.By which command i can delete the file forcefully ?
+Ans. rm -rf <filename>
+
+28.What is LVM ? 
+Ans. Stands for Logical Volume Management. to resize partition (extend and reduce)
+     We can't extend and reduce partition unless and until the partition under LVM.
+
+29.How to copy the file?
+Ans. cp source destination 
+
+30.how to rollback?
+Ans. yum history
+     then select id number which you want to rollback
+     yum history rollback <id number>
+
+31.tell me the steps before and after patching
+Ans. 
+
+32.COMMAND TO CHANGE THE UID OF THE USER
+Ans. usermod -u <user_ID> <username>
+
+33.WHAT WILL YOU DO IF THE SERVER IS IN HIGHUTILITY
+Ans. We will check which processes utilizing more or high resoursces. And we will inform to that perticular 
+     owner of that application or process.
+
+34.HOW TO CHECK WHICH APPLICATION IS TAKING MORE SPACE 
+Ans. 
+
+
+35.HOW TO CHECK DISKUSAGE
+Ans. df -h
+
+
+36.WHAT IS FSTAB
+Ans. Fstab is your operating system's file system table.
+
+
+37.How to Lock and unlock a specific user in Linux
+Ans. To Lock :-   usermod -L <username>
+                  OR passwd -l <username>
+     To Unlock:-  usermod -U <username>
+                  OR passwd -l <username>
+                            
+
+
+38.WHat is CLI
+Ans. Command Line Interface
+
+
+39.rmdir command
+Ans. to remove dir
+
+
+40.What is umask
+Ans. is a Linux command that is used to assign the default file permission sets for newly created dir or files.
+      for root 022 for normal user 002
+
+
+
+41.How we can check the permissions of the file or directories
+Ans. ls -l <filename> (for perticular file)
+     ls -l (for all files and directories)
+
+42.Whats the default permission of directories in linux (in numbers) 
+Ans. for root user (dir = 755 and file = 644)
+     for normal user (dir = 775 & file = 664)
+
+
+43.What is inode in linux?
+Ans. Linux® must allocate an index node (inode) for every file and directory in the filesystem.  Inodes do not store actual data. Instead, they store the metadata where you can find the storage   	blocks of each file’s data. 
+  
+44.How you can give permission to user if user is in nologin shell
+Ans. first login root and change shell /ect/passwd
+
+
+45. difference between /bin and /sbin
+Ans. When you type a command it is most likely comes from two directories /bin & /sbin. normal cmd present in /bin and superuser cmd in /sbin.
+      bin is short for binary (program) & in sbin s for superuser
+    
+      
+46. What fields is in the fstab
+Ans. Table contain 6 column
+      1)Device: usually given name (/dev/sda1 or /dev/sdb1) 
+      2)Mount Point: e.g /common
+      3)File System Type: ext4,ext3,xfs
+      4)Options: lists any active mount options. (defaults) 
+      5)Backup Operation: first digit. this is binary system where 1=dump 0=no backup
+      6)File System Check Order: second digit.0=fsck will not check FS.   
+
+47.What is kernel?
+Ans. Kernel is a program interact between H/W & S/W.
+
+
+48.What is SHELL?
+Ans. Shell is a program which provides a interface between user & OS.
+
+49.How to take a backup and about backup tools?
+Ans. We can take backup of files with the help of tar, rsync, cp.
+     rsync -rv filename path 
+     rsync -avzh source destination(usename@IP:/path)
+     a=archive h=human readable  z=compress b=backup
+     
+     tar -cvf filename.tar *(for backuping all files and dir of current dir) 
+     extract tar with below
+     tar -xvf filename.tar
+     extract in diff dir
+     tar  -xvf filename.tar -C /path where to extratc
+     Flags:
+           -c : Creates Archive 
+           -x : Extract the archive 
+           -f : creates archive with given filename
+           -z : zip, tells tar command that creates tar file using gzip
+           -C : for extracting diff location
+           
+  
+50.Which OS you are familiar with ?
+Ans. Linux OS such as (Ubunut, CentOS, SUSE, Linux Mint) Windows such as (Windows 7, 7 ultimate, 8, 10, 11)
+
+51.How to see or check schedulled cron jobs?
+Ans. crontab -l
+
+52.How restart  service?
+Ans. systemctl restart <servicename> for e.g systemctl restart httpd
+
+
+53.How to change ownership?
+Ans. chown username filename
+     
+     chown username:grpname filename
+     to change group
+     chgrp newgroupname filename
+
+54.UID of root?
+Ans. 0 (zero)
+
+
+55. What is multitask and multiuser?
+Ans. 
+
+56.ls -l fields?
+Ans. ls -l
+     Field 1 - Type of file (-, d, c, b)
+     Field 2 - File Permissions
+     Field 3 – SElinux
+     Field 4 – Number of links 
+     Field 5 – Owner
+     Field 6 – Group
+     Field 7 – Size
+     Field 8 – Last modified date and time
+     Field 9 – File name
+
+57.How to see inode?
+Ans. ls -i filename
+     df -i     
+
+58.Whats the commnad to check service is ena
+ble or disabled ?
+Ans. systemctl status <service_name>
+
+
+
+59.How to configure network in linux?
+Ans. vi /etc/sysconfig/network-scripts/ifcfg-ens192
+     then just add these lines in last 
+     IPADDR="IP ADDRESS"
+     PREFIX="SUBNETMASK"
+     GATEWAY="192.168.0.1"
+     DNS1="8.8.8.8"
