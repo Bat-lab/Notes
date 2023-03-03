@@ -1,0 +1,9 @@
+git fsck
+git reflog expire --expire=now --all
+git repack -ad  # Remove dangling objects from packfiles
+git prune       # Remove dangling loose objects
+
+git gc --aggressive --prune # if above not worked
+
+still have then
+rm -rf .git and git init from start
