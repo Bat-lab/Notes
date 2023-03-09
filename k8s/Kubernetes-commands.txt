@@ -27,5 +27,16 @@ Loggs
 volumes:-
 kubectl describe pvc --namespace <namespace>
 
+kubectl describe pv --namespace  devops-tools
+
 pods:-
 kubectl describe pod <podname> --namespace <namespace>
+
+
+#Show details of specific pod
+kubectl  describe pod <pod name> -n <namespace-name>
+
+# View logs for specific pod
+kubectl  logs <pod name> -n <namespace-name>
+
+

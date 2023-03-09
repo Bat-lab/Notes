@@ -17,3 +17,4 @@ git config --global user.email batmail555@protonmail.com
   146  cat this.txt
   147  git push -u origin master
 
+git remote set-url origin https://github.com/Bat-lab/notes.git
