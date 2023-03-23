@@ -39,4 +39,18 @@ kubectl  describe pod <pod name> -n <namespace-name>
 # View logs for specific pod
 kubectl  logs <pod name> -n <namespace-name>
 
+# View resources request and limit across nodes
+kubectl get nodes --no-headers | awk '{print $1}' | xargs -I {} sh -c 'echo {}; kubectl describe node {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve percent -ve -- ; echo'
+
+# view resources request limits of posd
+kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"/t"}{.spec.containers[].resources.limits/requests.memory/cpu}{"\n"}{end}' -n devops-tools
+
+
+------
+exec
+------
+
+kubectl exec -it -n <name-space> <pod-name> -c <cont-name> -- /bin/bash
+
+
 

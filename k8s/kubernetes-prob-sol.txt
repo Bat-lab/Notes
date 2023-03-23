@@ -1,9 +1,10 @@
-how to access kubernetes pod in root mode
+###how to access kubernetes pod in root mode
 
 kubectl get pods --all-namespaces
 docker ps | grep default
 docker exec -it -u root 4fa9287d46fb /bin/bash
 
-
+###Exiting due to DRV_AS_ROOT: The "docker" driver should not be used with root privileges.
+minikube start --force --driver=docker
 
 
