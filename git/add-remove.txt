@@ -1,7 +1,7 @@
 set:-
 
-git config --global user.name "Bat-lab"
-git config --global user.email batmail555@protonmail.com
+git config --global user.name "user-name"
+git config --global user.email "email"
 
 unset:-
 

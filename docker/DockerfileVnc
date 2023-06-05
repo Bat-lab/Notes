@@ -1,0 +1,29 @@
+# Use a lightweight base image
+FROM ubuntu:20.04
+RUN apt update -y
+RUN apt install fluxbox -y && apt install -f
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    x11vnc \
+    xvfb \
+    && apt-get clean
+
+
+# Set up the VNC password
+RUN mkdir -p ~/.vnc
+RUN x11vnc -storepasswd password ~/.vnc/passwd
+
+# Set up the startup script
+RUN echo "#!/bin/bash\n\
+    Xvfb :1 -screen 0 1360x1024x24 &\n\
+    sleep 5\n\
+    DISPLAY=:1 fluxbox &\n\
+    x11vnc -display :1 -xkb -ncache 10 -ncache_cr -forever -shared -passwd Welcome@2021 -rfbport 5900" > /root/startup.sh
+#    x11vnc -display :1 -xkb -ncache 10 -ncache_cr -forever -passwd Welcome@2021" -rfbport 5900 > /root/startup.sh
+RUN chmod +x /root/startup.sh
+
+# Expose VNC port
+EXPOSE 5900
+
+# Set the entrypoint to start the VNC server
+ENTRYPOINT ["/root/startup.sh"]

@@ -18,3 +18,7 @@ git config --global user.email batmail555@protonmail.com
   147  git push -u origin master
 
 git remote set-url origin https://github.com/Bat-lab/notes.git
+
+
+to pull repo (if repo is changing then it is good to pull every time before working)
+git pull master origin

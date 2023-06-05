@@ -9,7 +9,11 @@ kubectl delete -f <file-name>
 
 create svc:-
 kubectl create svc nodeport nginx --tcp=80:80
+kubectl create svc nodeport nginx --tcp=81<pod-port>:80<container-port>
 
+create pod:-
+kubectl run  --image=nginx nginx-pod --port=80
+kubectl delete pod nginx-pod
 
 minikube start
 minikube start --force
@@ -25,6 +29,7 @@ _______
 Loggs
 -------
 volumes:-
+------
 kubectl describe pvc --namespace <namespace>
 
 kubectl describe pv --namespace  devops-tools
@@ -45,6 +50,18 @@ kubectl get nodes --no-headers | awk '{print $1}' | xargs -I {} sh -c 'echo {}; 
 # view resources request limits of posd
 kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"/t"}{.spec.containers[].resources.limits/requests.memory/cpu}{"\n"}{end}' -n devops-tools
 
+# view specific columns from get pod
+kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName --all-namespaces
+
+--------------
+#top of pods
+--------------
+kubectl top pods --all-namespaces
+
+-----------
+objects and their info NAME,SHORTNAMES,APIVERSION,NAMESPACED,KIND
+------------------
+kubectl api-resources 
 
 ------
 exec
@@ -52,5 +69,19 @@ exec
 
 kubectl exec -it -n <name-space> <pod-name> -c <cont-name> -- /bin/bash
 
+
+---------------------------------------
+create a yaml from any object running
+--------------------------------------
+
+kubectl get deployment,service,pod yourapp -o yaml --export
+kubectl get deploy --all-namespaces -o yaml --export
+kubectl get deploy,sts,svc,configmap,secret -n default -o yaml --export > default.yaml
+
+examples:-
+kubectl get deploy --namespace nginx-test -o yaml
+kubectl get service --namespace nginx-test -o yaml
+
+we can save this in a yaml and delete or redeploy if required in case og yaml is missing
 
 
