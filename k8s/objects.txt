@@ -1,0 +1,58 @@
+In Kubernetes, there are various objects used to define and manage different aspects of your applications and infrastructure. Here are some commonly used objects in Kubernetes:
+
+1. Pods:
+   Pods are the smallest deployable units in Kubernetes. They represent a single instance of a running process in the cluster. Pods can contain one or more containers that are tightly coupled and share resources.
+
+2. Deployments:
+   Deployments provide declarative updates for managing replica sets and Pods. They ensure the desired number of Pods are running and handle scaling, rolling updates, and rollbacks.
+
+3. Services:
+   Services define a stable network endpoint to access a set of Pods. They provide an abstraction for load balancing, service discovery, and internal or external access to your applications.
+
+4. ConfigMaps:
+   ConfigMaps store configuration data as key-value pairs. They allow you to separate configuration from application code and make it easier to manage and update configurations.
+
+5. Secrets:
+   Secrets store sensitive information such as passwords, tokens, or certificates. They are used to securely store and distribute confidential data to Pods without exposing it in plain text.
+
+6. Ingress:
+   Ingress resources define rules and configurations for external access to Services within the cluster. They act as a gateway or entry point for incoming traffic to reach your applications.
+
+7. Persistent Volumes (PV) and Persistent Volume Claims (PVC):
+   Persistent Volumes and Persistent Volume Claims provide a way to manage storage resources in a cluster. PVs represent actual storage volumes, while PVCs are requests for storage made by Pods.
+
+8. Configurations:
+   Various configurations can be used in Kubernetes, such as PodSpec, DeploymentSpec, ServiceSpec, etc. These configurations define the desired state and behavior of the respective objects.
+
+
+9. StatefulSets:
+   StatefulSets are used for managing stateful applications that require stable network identities and persistent storage. They provide guarantees for ordering and uniqueness of Pods, making them suitable for databases or clustered systems.
+
+in other words there will be consistency, uniquiness (name will be unique every time recreated)  and clusterd environment where all the pods can read but one will write.
+
+10. DaemonSets:
+    DaemonSets ensure that a specific Pod is running on each node in the cluster. They are typically used for running monitoring agents, log collectors, or other system-level services.
+
+11. Jobs:
+    Jobs manage short-lived, batch-like workloads in Kubernetes. They create one or more Pods to complete a task, such as running a containerized job, and then terminate once the task is completed.
+
+12. CronJobs:
+    CronJobs are used for running scheduled tasks in a Kubernetes cluster. They allow you to define a schedule using the cron format, and Kubernetes will create Jobs based on that schedule.
+
+13. ReplicaSets:
+    ReplicaSets ensure a desired number of Pod replicas are running at all times. They are an older, lower-level mechanism for managing Pods and have been largely superseded by Deployments.
+
+14. Namespaces:
+    Namespaces provide a way to partition resources in a Kubernetes cluster. They enable multiple teams or projects to coexist within the same cluster by creating isolated virtual clusters.
+
+15. ServiceAccounts:
+    ServiceAccounts are used to provide an identity to Pods or containers running within them. They are associated with access control policies, allowing fine-grained authorization and authentication.
+
+16. HorizontalPodAutoscaler (HPA):
+    HPA automatically scales the number of Pods based on metrics such as CPU usage or custom metrics. It ensures that the desired level of performance is maintained by adjusting the number of replicas.
+
+17. Custom Resources:
+    Custom Resources allow you to extend Kubernetes' API by defining your own object types. This enables you to manage and interact with custom resources using the standard Kubernetes tools and workflows.
+
+
+

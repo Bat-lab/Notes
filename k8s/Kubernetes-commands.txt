@@ -53,6 +53,9 @@ kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"/t"}{.spec.cont
 # view specific columns from get pod
 kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName --all-namespaces
 
+# view containers in a pods:-
+kubectl get pods <podname> -n <namespace>  -o jsonpath='{.spec.containers[*].name}'
+
 --------------
 #top of pods
 --------------
