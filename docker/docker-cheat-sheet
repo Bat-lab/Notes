@@ -102,3 +102,6 @@ sudo ls -l /var/lib/docker/volumes/vol-name/_data------------volume location on 
 
 
 
+some commands:-
+docker build -t example-arg-env-cmd-ent -f Dockerfile /tmp --build-arg oss=18.04
+

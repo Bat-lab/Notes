@@ -1,0 +1,95 @@
+=============================================tips & tricks==========================================
+pandoc linux-one-liner1.docx | lynx --stdin -------- open doc file in terminal
+w3m google.com  -------------------------------------surfing internet in terminal
+w3m -o imgdisplay=w3mimgdisplay the-batman-wallpaper-32.jpg -------------- open image in terminal
+===========================================find========================================================
+
+find / -size 50k
+
+find / -type f -atime 60
+
+
+===========================file permissions=============================================================
+
+setfacl -R -m "u:apmosys:rw" /opt/rearbkp.yaml --------------- apmosys will have rw on /opt/rearbkp.yaml -R recursive if directory
+
+getfacl /opt/rearbkp.yaml --------------- to check all set facl
+
+setfacl -b /opt/rearbkp.yaml -------------- to remove all facl
+
+setfacl -R -x "u:apmosys" rearbkp.yaml ------------- -x to remove one user only
+
+
+
+sudo ntpdate -u in.pool.ntp.org
+
+
+=====================to create multiple tar files with incrimental order==================================
+tar -cvf - <stuff to put in archive> | split --bytes=1m --suffix-length=4 --numeric-suffix - myarchive.tar.
+cat myarchive.tar.* | tar xvf -           <-------------------------> to extract all myarchive.tar.* files
+
+
+nfs=======================
+exportfs -av
+showmount -e
+systemctl restart nfs-server
+vim /etc/exports
+exportfs -r -------------- refresh nfs mount 
+mount -a ------------- to manually mount if server goes down or disconnected
+mount 192.168.0.123:/backup/jenkins_nfs /home/apmosys/jenkins_nfs
+
+##################################date and time #############################
+
+yum install ntpdate
+ntpdate pool.ntp.org ----------------------- to set date and time from internet as per your timezone
+date --set=20230330 23
+date --set="20230330 23"
+sudo timedatectl set-ntp off --------------- to remove auto date sync
+
+
+
+#####################password encryption method #######################33
+
+
+echo 'your-real-pass' | openssl enc -aes-256-cbc -md sha512 -a -pbkdf2 -iter 100000 -salt -pass pass:'something.to.encrypt'
+
+U2FsdGVkX18225S4xgq9HAZ1+dCkrI0aT2T9sSY/Lq8z7VAPthf84q1N8dAShVfo
+
+echo U2FsdGVkX18225S4xgq9HAZ1+dCkrI0aT2T9sSY/Lq8z7VAPthf84q1N8dAShVfo | openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:'something.to.encrypt'
+pandoc linux-one-liner1.docx | lynx --stdin
+df -h | sed -n '1p;5p' ------------>> prints line 1 and 5
+df -h | sed -n '1,5p' ------------>> prints line 1 to 5
+df -h | awk 'FNR == 1 || FNR == 5' --------------->> print line 1 and 5
+df -h | awk 'FNR == 1, FNR == 5' --------------->> print line 1 to 5
+
+
+
+
+######################grep command#################################
+
+-i case sensitive
+-n for line number printing
+-r for recursively all files
+
+grep -nr '/bin/bash' /opt/
+grep -in "/Bin/bash" /opt/shh.sh
+
+using pipe
+ps -ef | grep -i "firefox"
+
+
+
+###########################find#####################################
+
+
+
+find <where> -type (-f<file>,-d<dir>,-l<dir>,-c<char-device>,-b<block-device>,-p<named-pipe>,-s<socket>) -size <size>(b<byte>,c<bytes>,k<kb>,M<mb>,G<gb>)
+
+example:-
+find /opt -type f -size 50k
+find /opt -type f -name Dockerfile
+ssh -o "StrictHostKeyChecking no" root@192.168.4.174 -p 2206
+
+
+###########################for loop###################################
+for (( i = 0 ; i <= 100 ; i+=3 )); do echo $i ;done

@@ -1,0 +1,37 @@
+[Unit]
+#Description=MySQL Server
+#Documentation=man:mysqld(8)
+#Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html
+After=network.target
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=root
+Group=root
+
+Type=forking
+
+PIDFile=/tmp/db.pid
+
+# Disable service start and stop timeout logic of systemd for mysqld service.
+TimeoutSec=0
+
+# Execute pre and post scripts as root
+PermissionsStartOnly=true
+
+# Start main service
+ExecStart=/opt/mysql.sh
+
+# Use this to switch malloc implementation
+
+# Sets open_files_limit
+LimitNOFILE = 5000
+
+#Restart=no
+
+#RestartPreventExitStatus=1
+
+PrivateTmp=false
