@@ -11,6 +11,7 @@ git config --global user.email batmail555@protonmail.com
   140  git commit -m "first commit"
   141  git remote add origin https://github.com/Bat-lab/projects-notes.git
   142  git push -u origin master
+       git push https://<User Name>:<Token>@github.com/<User Name>/<Your Repository>.git
   143  ip r
   144  systemctl status sshd
   145  sudo apt install openssh-server
