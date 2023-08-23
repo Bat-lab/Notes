@@ -1,0 +1,3 @@
+git rm -r <dir name>
+git commit -m "deleted some files"
+git push -u  origin  master
